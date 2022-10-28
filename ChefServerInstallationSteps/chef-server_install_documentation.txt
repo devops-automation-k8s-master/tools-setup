@@ -1,0 +1,88 @@
+---------------------------------------------------------------------------------------------------------------
+                              STEPS FOR CHEF_SERVER INSTALLATION
+---------------------------------------------------------------------------------------------------------------
+1)download chef-server
+	https://downloads.chef.io/chef-server/
+	Read This Link
+	https://www.linode.com/docs/applications/chef/deploy-a-chef-server-workstation-and-node-on-ubuntu-14-04
+
+2)Install this package by below command
+    sudo dpkg -i chef-server-core_*.deb
+
+3)run this command 
+    sudo chef-server-ctl reconfigure 
+
+4)check server is configured properly or not with the help of below command
+    sudo chef-server-ctl status
+    a) we can get error like this
+		/opt/opscode/embedded/lib/ruby/gems/2.2.0/gems/omnibus-ctl-0.5.0/lib/omnibus-ctl.rb:361:in `run_sv_command_for_service': undefined method `exitstatus' for nil:NilClass (NoMethodError)
+		from /opt/opscode/embedded/lib/ruby/gems/2.2.0/gems/omnibus-ctl-0.5.0/lib/omnibus-ctl.rb:351:in `block in run_sv_command'
+		from /opt/opscode/embedded/lib/ruby/gems/2.2.0/gems/omnibus-ctl-0.5.0/lib/omnibus-ctl.rb:350:in `each'
+		from /opt/opscode/embedded/lib/ruby/gems/2.2.0/gems/omnibus-ctl-0.5.0/lib/omnibus-ctl.rb:350:in `run_sv_command'
+		from /opt/opscode/embedded/lib/ruby/gems/2.2.0/gems/omnibus-ctl-0.5.0/lib/omnibus-ctl.rb:162:in `block (2 levels) in <class:Ctl>'
+		from /opt/opscode/embedded/lib/ruby/gems/2.2.0/gems/omnibus-ctl-0.5.0/lib/omnibus-ctl.rb:736:in `run'
+		from /opt/opscode/embedded/service/omnibus-ctl/chef-server-ctl:237:in `<main>'
+
+		NOTE:-these error we can remove with the help of below command
+		      cmd> reboot   (reboot the machine and check again)
+		       or read this page https://github.com/chef/chef-server/issues/422
+
+
+	b) or our installaion is successfull then we get below output.
+	    root@ip-172-31-31-250:~# chef-server-ctl status
+		run: bookshelf: (pid 1262) 27s; run: log: (pid 1243) 27s
+		run: oc_bifrost: (pid 1249) 27s; run: log: (pid 1239) 27s
+		run: oc_id: (pid 1259) 27s; run: log: (pid 1250) 27s
+		run: opscode-erchef: (pid 1260) 27s; run: log: (pid 1255) 27s
+		run: opscode-expander: (pid 1257) 27s; run: log: (pid 1248) 27s
+		run: opscode-solr4: (pid 1263) 27s; run: log: (pid 1251) 27s
+		run: postgresql: (pid 1256) 27s; run: log: (pid 1238) 27s
+		run: rabbitmq: (pid 1252) 27s; run: log: (pid 1240) 27s
+
+---------------------------------------------------------------------------------------------------------------        CHEF_SERVER INSTALLED SUCCESSFULLY
+---------------------------------------------------------------------------------------------------------------
+
+create a user and organisation in chefserver
+
+sudo chef-server-ctl user-create admin anwar khan anwarkhan621@gmail.com Anwarchef@123 --filename ~/.chef/admin.pem
+
+sudo chef-server-ctl org-create devops DevelopmentOperationsOrg --association_user admin --filename ~/.chef/devops.pem
+------------------------------------------------------------------------------------------------------------
+Install chef-workstation
+------------------------------------------------------------------------------------------------------
+1)download chef-workstaion from here
+   wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.5.1-1_amd64.deb
+   or follow this link
+   https://www.linode.com/docs/applications/chef/deploy-a-chef-server-workstation-and-node-on-ubuntu-14-04
+
+ 2) Install package
+    sudo dpkg -i chefdk_*.deb
+
+ 3)verify chef component
+    chef verify
+
+ 4) create mkdir chef-repo/.chef
+           git clone ezdiopsrepositoryurl
+ 5) copy pem file from chef-server to chef-workstation in .chef folder 
+      admin.pem validator.pem(or organisation.pem)
+ 6) copy secret file for encoding and decoding to .chef folder
+ 7)configure knife.rb file by this command knife configure
+
+      log_level                :info
+		log_location             STDOUT
+		node_name                'anavar'
+		client_key               '/home/priyanshu/chef-repo/.chef/Chef_client_.pem'
+		validation_client_name   'chef-validator'
+		validation_key           '/home/priyanshu/chef-repo/.chef/AWS_chef-validator.pem'
+		chef_server_url          'https://10.120.6.206:443'
+		syntax_check_cache_path  '/home/anavar/chef-repo/.chef/syntax_check_cache'
+		cookbook_path [ '/home/priyanshu/chef-repo/ezdi-ops/cookbooks' ]
+
+		knife[:secret_file] = "/home/priyanshu/chef-repo/work_secret/secret"
+		# Amazon AWS
+		  knife[:aws_access_key_id] = 'accesskeysid'
+		  knife[:aws_secret_access_key] = 'secretkeyid'
+		  knife[:region] = "us-east-1"
+8)knife ssl fetch
+
+

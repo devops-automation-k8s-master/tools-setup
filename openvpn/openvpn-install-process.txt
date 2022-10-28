@@ -1,0 +1,90 @@
+apt-get install openvpn
+apt-get install easy-rsa
+mkdir /etc/openvpn/easy-rsa
+cd /usr/share/easy-rsa
+gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz > /etc/openvpn/server.conf
+cp -R * /etc/openvpn/easy-rsa/
+cd /etc/openvpn/easy-rsa
+source ./vars
+./clean-all
+./build-dh
+./pkitool --initca
+./pkitool --server server
+cd keys
+openvpn --genkey --secret ta.key
+now configure server.conf
+------------------------
+# configure openvpn port
+port 1194
+proto tcp
+dev tun
+
+ca /etc/openvpn/easy-rsa/keys/ca.crt
+cert /etc/openvpn/easy-rsa/keys/server.crt
+key /etc/openvpn/easy-rsa/keys/server.key  # This file should be kept secret
+
+
+dh /etc/openvpn/easy-rsa/keys/dh2048.pem
+server 10.8.0.0 255.255.0.0
+
+ifconfig-pool-persist ipp.txt
+
+push "route 11.20.0.0 255.255.0.0"
+push "route 192.168.0.0 255.255.240.0"
+
+
+
+
+keepalive 10 120
+comp-lzo
+
+persist-key
+persist-tun
+
+status openvpn-status.log
+log         /var/log/openvpn.log
+log-append  /var/log/openvpn.log
+
+verb 3
+-------------------------------
+source ./vars 
+  176  ./pkitool ubuntu
+
+--------------------
+client
+client
+dev tun
+proto tcp
+remote 52.6.175.194 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca /etc/openvpn/mylocalvpnconf/ca.crt
+cert /etc/openvpn/mylocalvpnconf/ubuntu.crt
+key /etc/openvpn/mylocalvpnconf/ubuntu.key
+comp-lzo
+verb 3
+comp-lzo
+
+persist-key
+persist-tun
+---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

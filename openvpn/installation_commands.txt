@@ -1,0 +1,421 @@
+  191  cat ubuntu.crt 
+  192  cat ubuntu.key 
+  193  ls
+  194  cat server.csr 
+  195  ls
+  196  cd ..
+  197  ls
+  198  cd ..
+  199  ls
+  200  cat server.conf 
+  201  cd easy-rsa/
+  202  ls
+  203  cd keys/
+  204  ls
+  205  cat ca.crt 
+  206  ls
+  207  cd ..
+  208  ls
+  209  cd ..
+  210  ls
+  211  cat ipp.txt 
+  212  cat openvpn-status.log 
+  213  ls
+  214  clear
+  215  ls
+  216  cd /var/openvn
+  217  ls
+  218  cd /etc/openvpn 
+  219  ls
+  220  cat server.conf 
+  221  openvpn start
+  222  ls
+  223  cd /var/lo
+  224  cd /var/log
+  225  ls
+  226  cat openvpn.log 
+  227  sudo service openvpn start
+  228  ls
+  229  cd /etc/init.d/
+  230  ls
+  231  openvpn start
+  232  openvpn start --help
+  233  openvpn --help
+  234  cd
+  235  cd /etc/openvpn
+  236  ls
+  237  openvpn --config server.conf 
+  238  cat server.conf 
+  239  cp server.conf oldserver
+  240  sudo cp server.conf oldserver
+  241  sudo cat > server.conf 
+  242  # configure openvpn port
+  243  port 1194
+  244  proto tcp
+  245  dev tun
+  246  ca /etc/openvpn/easy-rsa/keys/ca.crt
+  247  cert /etc/openvpn/easy-rsa/keys/server.crt
+  248  key /etc/openvpn/easy-rsa/keys/server.key  # This file should be kept secret
+  249  dh /etc/openvpn/easy-rsa/keys/dh2048.pem
+  250  server 10.8.0.0 255.255.0.0
+  251  ifconfig-pool-persist ipp.txt
+  252  push "route 11.20.0.0 255.255.0.0"
+  253  push "route 192.168.0.0 255.255.240.0"
+  254  keepalive 10 120
+  255  comp-lzo
+  256  persist-key
+  257  persist-tun
+  258  status openvpn-status.log
+  259  log         /var/log/openvpn.log
+  260  log-append  /var/log/openvpn.log
+  261  verb 3
+  262  sudo -s
+  263  history
+  264  ls
+  265  cd /etc/openvpn
+  266  ls
+  267  cat ipp.txt 
+  268  cat oldserver 
+  269  ls
+  270  cat openvpn-status.log 
+  271  ls
+  272  l
+  273  cat server.conf 
+  274  exit
+  275  ls
+  276  sudo -s
+  277  exit
+  278  sudo -s
+  279  cd /etc/openvpn
+  280  ls
+  281  cat server.conf 
+  282  cat > server.conf 
+  283  openvpn --config server.conf start
+  284  ls
+  285  cd /etc/openvpn/
+  286  ls
+  287  cd /var/log
+  288  ls
+  289  cat openvpn.log 
+  290  ls
+  291  clear
+  292  ls
+  293  tail -200f openvpn.log 
+  294  ls
+  295  clear
+  296  ls
+  297  cd /etc/openvpn/
+  298  openvpn --config server.conf start
+  299  openvpn --config server.conf restart
+  300  sudo service openvpn stop
+  301  openvpn --config server.conf start
+  302  cat > server.conf 
+  303  sudo service openvpn status
+  304  openvpn --config server.conf 
+  305  cp server.conf runningserverconf
+  306  cat > server.conf 
+  307  openvpn --config server.conf 
+  308  ls
+  309  cat runningserverconf 
+  310  echo 1 > /proc/sys/net/ipv4/ip_forward
+  311  cp runningserverconf server.conf 
+  312  openvpn --config server.conf 
+  313  cat server.conf 
+  314  cat >server.conf 
+  315  openvpn --config server.conf 
+  316  exit
+  317  sudo -s
+  318  exit
+  319  mkdir ccd
+  320  cat > ubuntu
+  321  cat > neeraj.pem
+  322  chmod 400 neeraj.pem 
+  323  ssh -i neeraj.pem ubuntu@11.20.3.137
+  324  cd /etc/openvpn
+  325  ls
+  326  sudo -s
+  327  ls
+  328  cd /etc/openvpn/
+  329  ls
+  330  cat server.conf 
+  331  sudo cat > server.conf 
+  332  sudo -s
+  333  cat > server.conf 
+  334  openvpn --config server.conf 
+  335  cat > server.conf 
+  336  openvpn --config server.conf 
+  337  cat > server.conf 
+  338  openvpn --config server.conf 
+  339  ls
+  340  cat > server.conf 
+  341  openvpn --config server.conf 
+  342  ls
+  343  cd /var/log
+  344  ls
+  345  cat openvpn.log 
+  346  tail -200f openvpn.log 
+  347  iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+  348  iptables -t nat -A POSTROUTING -s 10.8.0.0/16 -o eth0 -j MASQUERADElz
+  349  iptables -t nat -A POSTROUTING -s 10.8.0.0/16 -o eth0 -j MASQUERADEl
+  350  iptables -t nat -A POSTROUTING -s 10.8.0.0/16 -o eth0 -j MASQUERADE
+  351  sudo -s
+  352  ls
+  353  cd /etc/openvpn
+  354  ls
+  355  sudo apt-get install iptables
+  356  sudo iptables -L -V
+  357  iptables -L -v
+  358  sudo -s
+  359  cd /etc/openvpn
+  360  ls
+  361  ls
+  362  cd /var/log
+  363  ls
+  364  tail -200f openvpn.log 
+  365  ls
+  366  openvpn status
+  367  history
+  368  cd /etc/openvpn
+  369  openvpn --config server.conf start
+  370  sduo -s
+  371  sudo -s
+  372  sudo 
+  373  exit
+  374  sudo -s
+  375  ls
+  376  cd /etc/openvpn
+  377  ls
+  378  openvpn --config server.conf 
+  379  ls
+  380  openvpn --config server.conf 
+  381  openvpn --config server.conf restart
+  382  openvpn --config server.conf status
+  383  sudo service openvpn status
+  384  service openvpn status
+  385  exit
+  386  cd /var/logs
+  387  ls
+  388  cd /var/logs
+  389  cd /var
+  390  ls
+  391  cd log
+  392  ls
+  393  cat openvpn.log 
+  394  openvpn status
+  395  cat openvpn.log 
+  396  ifconfig
+  397  iptables -t nat -F
+  398  ls
+  399  cd /etc/openvpn
+  400  ls
+  401  cat openvpn-status.log 
+  402  ls
+  403  cat ipp.txt 
+  404  cd u
+  405  ls
+  406  cat ubuntu
+  407  rm -rf ubuntu
+  408  cd ccd/
+  409  ls
+  410  ls -lrt
+  411  ls
+  412  ll
+  413  cd ..
+  414  cat update-resolv-conf 
+  415  ls
+  416  cd easy-rsa/
+  417  ls
+  418  cd ..
+  419  ls
+  420  cd /
+  421  ls
+  422  ping 11.20.2.141
+  423  ping 11.20.2.244
+  424  iptables -t nat -F
+  425  sudo /sbin/iptables-save
+  426  /sbin/iptables-save
+  427  iptables -t nat -I POSTROUTING -o eth0 -s 10.8.0.0/16 -j MASQUERADE
+  428  /sbin/iptables-save
+  429  cd /etc/openvpn
+  430  ls
+  431  cat server.conf 
+  432  cat > server.conf 
+  433  openvpn --config server.conf 
+  434  openvpn --config server.conf start
+  435  openvpn stop
+  436  sudo service openvpn stop
+  437  service openvn status
+  438  service openvpn status
+  439  openvpn --config server.conf
+  440  sudo -s
+  441  cd /etc/openv
+  442  cd /etc/openvpn
+  443  ls
+  444  cat server.conf 
+  445  sudo -s
+  446  service openvpn status
+  447  sudo service openvpn start
+  448  service openvpn status
+  449  ls
+  450  cat server.conf 
+  451  ls
+  452  cat openvpn-status.log 
+  453  sudo -s
+  454  cat openvpn-status.log 
+  455  ls
+  456  openvpn --config server.conf 
+  457  init 0
+  458  iptables -L -v
+  459  iptables -L 
+  460  iptables -L
+  461  iptables -t nat -I POSTROUTING -o eth0 -s 11.20.0.0/16 -j MASQUERADE
+  462  iptables -L
+  463  iptables -t nat -L -n -v --line-numbers
+  464  iptables -L --line-numbers
+  465  man iptables
+  466  iptables -t nat -L -n -v --line-numbers
+  467  iptables -t nat -F
+  468  iptables -t nat -L -n -v --line-numbers
+  469  iptables -t nat -I POSTROUTING -o eth0 -s 11.20.0.0/16 -j MASQUERADE
+  470  iptables -t nat -L -n -v --line-numbers
+  471  cd /etc/openvpn
+  472  ls
+  473  cat runningserverconf 
+  474  iptables -t nat -I POSTROUTING -o eth0 -s 192.168.0.0/20 -j MASQUERADE
+  475  iptables -t nat -L -n -v --line-numbers
+  476  cat > server.conf 
+  477  sudo /sbin/iptables-save
+  478  iptables -t nat -L -n -v --line-numbers
+  479  ls
+  480  openvpn --config server.conf 
+  481  ls
+  482  cat > server.conf 
+  483  # configure openvpn port
+  484  port 1194
+  485  proto tcp
+  486  dev tun
+  487  ca /etc/openvpn/easy-rsa/keys/ca.crt
+  488  cert /etc/openvpn/easy-rsa/keys/server.crt
+  489  key /etc/openvpn/easy-rsa/keys/server.key  # This file should be kept secret
+  490  dh /etc/openvpn/easy-rsa/keys/dh2048.pem
+  491  server 10.8.0.0 255.255.0.0
+  492  ifconfig-pool-persist ipp.txt
+  493  route 11.20.0.0 255.255.0.0
+  494  push "route 11.20.2.0 255.255.0.0"
+  495  #push "route 11.20.3.0 255.255.255.0"
+  496  push "route 192.168.0.0 255.255.240.0"
+  497  #push "route 192.168.0.0 255.255.0.0"
+  498  keepalive 10 120
+  499  comp-lzo
+  500  persist-key
+  501  persist-tun
+  502  status openvpn-status.log
+  503  log         /var/log/openvpn.log
+  504  log-append  /var/log/openvpn.log
+  505  verb 3
+  506  iptables -t nat -I POSTROUTING -o eth0 -s 11.20.0.0/16 -j MASQUERADE
+  507  iptables -t nat -L -n -v --line-numbers
+  508  iptables -t nat -I POSTROUTING -o eth0 -s 192.168.0.0/20 -j MASQUERADE
+  509  iptables -t nat -L -n -v --line-numbers
+  510  sudo /sbin/iptables-save
+  511  openvpn --config server.cong
+  512  openvpn --config server.conf
+  513  cat > server.conf
+  514  openvpn --config server.conf
+  515  exit
+  516  iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+  517  iptables -t nat -F
+  518  iptables -t nat -A POSTROUTING -s 10.8.0.0/16 -o eth0 -j MASQUERADE
+  519  sudo /sbin/iptables-save
+  520  ls
+  521  cd /etc/openvpn/
+  522  ls
+  523  cd /var/logs
+  524  cd /var/log
+  525  ls
+  526  cat openvpn.log 
+  527  ls
+  528  cd /etc/openvpn
+  529  ls
+  530  cat server.conf 
+  531  suo -s
+  532  sudo -
+  533  sudo -s
+  534  ls
+  535  sudo -s
+  536* openvpn --config server.conopen
+  537  history
+root@ip-11-20-2-141:/etc/openvpn# iptables -t nat -L -n -v --line-numbers
+Chain PREROUTING (policy ACCEPT 66 packets, 10928 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT (policy ACCEPT 6 packets, 320 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 6 packets, 670 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain POSTROUTING (policy ACCEPT 6 packets, 670 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        2   120 MASQUERADE  all  --  *      eth0    10.8.0.0/16          0.0.0.0/0           
+root@ip-11-20-2-141:/etc/openvpn# cat server.conf 
+# configure openvpn port
+port 1194
+proto tcp
+dev tun
+
+ca /etc/openvpn/easy-rsa/keys/ca.crt
+cert /etc/openvpn/easy-rsa/keys/server.crt
+key /etc/openvpn/easy-rsa/keys/server.key  # This file should be kept secret
+
+
+dh /etc/openvpn/easy-rsa/keys/dh2048.pem
+server 10.8.0.0 255.255.0.0
+
+ifconfig-pool-persist ipp.txt
+#route 11.20.0.0 255.255.0.0
+push "route 11.20.0.0 255.255.0.0"
+#push "route 11.20.3.0 255.255.255.0"
+push "route 192.168.0.0 255.255.240.0"
+#push "route 192.168.0.0 255.255.0.0"
+
+
+
+
+keepalive 10 120
+comp-lzo
+
+persist-key
+persist-tun
+
+status openvpn-status.log
+log         /var/log/openvpn.log
+log-append  /var/log/openvpn.log
+
+verb 3
+
+
+
+----------------------------------------
+client
+dev tun
+proto tcp
+remote 52.6.175.194 1194
+#push "dhcp-option DNS 10.8.0.1"
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca /etc/openvpn/mylocalvpnconf/ca.crt
+cert /etc/openvpn/mylocalvpnconf/ubuntu.crt
+key /etc/openvpn/mylocalvpnconf/ubuntu.key
+comp-lzo
+verb 3
+comp-lzo
+
+persist-key
+persist-tun
+
+
+/////////////////////
+ip forwarding must be enabled
